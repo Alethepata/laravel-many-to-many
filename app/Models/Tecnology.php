@@ -16,6 +16,10 @@ class Tecnology extends Model
         'slug'
     ];
 
+    public function projects(){
+        return $this->belongsToMany(Project::class);
+    }
+
     public static function generateSlug($string){
 
         $slug =  Str::slug($string, '-');
