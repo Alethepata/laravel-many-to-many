@@ -9,6 +9,11 @@
     @endif
 
     <h1>Progetto : {{$project->title}}</h1>
+    @forelse ($project->tecnologies as $tecnology)
+    <span class="badge text-bg-success">{{$tecnology->name}}</span>
+    @empty
+    {{""}}
+    @endforelse
 
     @if ($project->type)
         <p>Tipo : {{$project->type->name}}</p>
