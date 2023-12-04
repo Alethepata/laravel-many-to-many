@@ -24,7 +24,14 @@
             @foreach ($projects as $project)
                <tr>
                  <td>{{$project->id}}</td>
-                 <td>{{$project->title}}</td>
+                 <td>
+                    {{$project->title}}
+                    @forelse ($project->tecnologies as $tecnology)
+                    <span class="badge text-bg-success">{{$tecnology->name}}</span>
+                    @empty
+                    {{""}}
+                    @endforelse
+                </td>
                  <td>{{$project->start_date }}</td>
 
                  @if ($project->end_date)
