@@ -23,21 +23,35 @@
           <input type="text" placeholder="Nome progetto" class="form-control" name="title">
         </div>
 
-        <label for="type_id">Tipo</label>
-        <select class="form-select" name="type_id">
-            <option selected>Scegli il tipo</option>
+        <div class="mb-3">
+            <label for="type_id">Tipo</label>
+            <select class="form-select" name="type_id">
 
-            @foreach ($types as $type)
-                <option value="{{$type->id}}">{{$type->name}}</option>
-            @endforeach
+                <option selected>Scegli il tipo</option>
+
+                @foreach ($types as $type)
+                    <option value="{{$type->id}}">{{$type->name}}</option>
+                @endforeach
 
 
-          </select>
+              </select>
+        </div>
 
-          <div class="mb-3 my-3">
+        @foreach ($tecnologies as $tecnology)
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{$tecnology->id}}" id="tecnology_{{$tecnology->id}}" name="tecnologies[]">
+                <label class="form-check-label" for="tecnologies[]">
+                  {{$tecnology->name}}
+                </label>
+            </div>
+
+         @endforeach
+
+        <div class="mb-3 my-3">
             <label for="image" class="form-label">Imagine</label>
             <input class="form-control" type="file" id="image" name="image">
-          </div>
+        </div>
 
 
         <div class="form-floating my-5">

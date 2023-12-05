@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Tecnology;
 
 class ProjectController extends Controller
 {
@@ -30,7 +31,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $tecnologies= Tecnology::all();
+        return view('admin.projects.create', compact('types', 'tecnologies'));
     }
 
     /**
@@ -41,12 +43,14 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+
         $form_data = $request->all();
 
         $form_data['slug'] = Project::generateSlug($form_data['title']);
         $form_data['start_date'] = date('Y-m-d');
 
         $new_project = new Project();
+
         if(array_key_exists('image', $form_data) && $form_data['image']!= ""){
 
 
@@ -56,10 +60,14 @@ class ProjectController extends Controller
 
         }
 
+
         $new_project->fill($form_data);
 
-
         $new_project->save();
+
+        if(array_key_exists('tecnologies', $form_data)){
+            $new_project->tecnologies()->attach($form_data['tecnologies']);
+        };
 
         return redirect()->route('admin.projects.show', $new_project)->with('success', 'Aggiunto correttamente');;
 
