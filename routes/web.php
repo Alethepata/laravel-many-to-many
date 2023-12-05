@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TecnologyController;
 use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\TecnologyProjectController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,5 +40,6 @@ Route::middleware(['auth', 'verified'])
     Route::resource('tecnologies', TecnologyController::class);
     Route::resource('types', TypeController::class);
     Route::get('type-project', [TypeController::class, 'typeProject'])->name('type-project');
+    Route::get('tecnolgy-project/{tecnology}',[TecnologyController::class, 'tecnologyProject'])->name('tecnolgy-project');
    });
 require __DIR__.'/auth.php';
