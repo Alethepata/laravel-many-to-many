@@ -24,15 +24,33 @@
           <input type="text" placeholder="Nome progetto" class="form-control" name="title" value="{{old('name', $project->title)}}">
         </div>
 
-        <label for="type_id">Tipo</label>
-        <select class="form-select" name="type_id">
-            <option>Scegli il tipo</option>
+        <div class="mb-3">
+            <label for="type_id">Tipo</label>
+            <select class="form-select" name="type_id">
+                <option>Scegli il tipo</option>
 
-            @foreach ($types as $type)
-                <option value="{{$type->id}}" @if ($type->id === old('type_id', $project?->type?->id)) selected @endif>{{$type->name}}</option>
-            @endforeach
+                @foreach ($types as $type)
+                    <option value="{{$type->id}}" @if ($type->id === old('type_id', $project?->type?->id)) selected @endif>{{$type->name}}</option>
+                @endforeach
 
-          </select>
+            </select>
+        </div>
+
+          @foreach ($tecnologies as $tecnology)
+
+          <div class="form-check">
+              <input class="form-check-input"
+              type="checkbox" value="{{$tecnology->id}}"
+              id="tecnology_{{$tecnology->id}}"
+              name="tecnologies[]"
+              @if ($project?->tecnologies->contains($tecnology)) checked @endif
+              >
+              <label class="form-check-label" for="tecnologies[]">
+                {{$tecnology->name}}
+              </label>
+          </div>
+
+       @endforeach
 
         <div class="form-floating my-5">
             <textarea
