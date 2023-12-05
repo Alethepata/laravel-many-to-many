@@ -7,7 +7,7 @@
         <thead>
           <tr>
             <th scope="col">Id</th>
-            <th scope="col">Titolo</th>
+            <th scope="col">Project</th>
           </tr>
         </thead>
         <tbody>
